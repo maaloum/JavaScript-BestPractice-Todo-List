@@ -4,7 +4,7 @@ import addTask from './addTask.js';
 
 let editableID;
 let editBoleen = false;
-const submit = document.querySelector('.enter');
+const addbtn = document.querySelector('.enter');
 const input = document.querySelector('.input');
 const btnCompleted = document.querySelector('.btnCompleted');
 const displayTodo = () => {
@@ -32,7 +32,7 @@ const displayTodo = () => {
     check.addEventListener('click', (e) => {
       const taskName = e.target.parentElement.lastElementChild;
       if (e.target.checked) {
-        taskName.style.textDecoration = 'line-through';
+        taskName.classList.add('completed');
         todos[e.target.dataset.id].completed = true;
         btnCompleted.addEventListener('click', () => {
           const completed = todos.filter((todo) => todo.completed === false);
@@ -43,7 +43,7 @@ const displayTodo = () => {
           displayTodo();
         });
       } else {
-        taskName.style.textDecoration = 'none';
+        taskName.classList.add('incompleted');
       }
     });
   });
@@ -68,7 +68,7 @@ const displayTodo = () => {
 };
 
 displayTodo();
-submit.addEventListener('click', () => {
+addbtn.addEventListener('click', () => {
   const userInput = input.value.trim();
   const todos = getTasks();
   if (userInput) {
